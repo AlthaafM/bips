@@ -1,33 +1,29 @@
 <pre>
   BIP: <Leave Blank>
-  Title: Quantum-Resistant Transition for Dormant P2PKH Addresses
-  Author: AlthaafM
+  Layer: Consensus (soft fork)
+  Title: Post-Quantum Transition Window for Legacy P2PKH Outputs
+  Author: AlthaafM <mohanedalthaaf@gmail.com>
+  Comments-Summary: No comments yet.
+  Comments-URI: https://github.com
   Status: Draft
   Type: Standards Track
   Created: 2024-04-21
+  License: BSD-2-Clause
 </pre>
 
 ==Abstract==
-This proposal introduces a "Transition Window" for dormant Bitcoin addresses 
-to register Post-Quantum Cryptography (PQC) public keys. This protects 
-legacy funds (P2PK/P2PKH) from future Shor's algorithm attacks.
+This proposal defines a consensus-level soft fork to allow owners of legacy P2PKH addresses to commit to a Post-Quantum Cryptography (PQC) public key. By utilizing a "Commitment Transaction," users can secure dormant funds against future Shor's algorithm attacks before a global quantum threat is realized.
 
 ==Motivation==
-Roughly 4 million BTC are stored in addresses with exposed public keys. 
-A quantum attacker could derive private keys for these funds. We need a 
-way for owners to "flag" their addresses as protected by a new QR signature.
+Existing legacy addresses (P2PK/P2PKH) are vulnerable to private key derivation via Shor's algorithm once a Cryptographically Relevant Quantum Computer (CRQC) exists. This BIP provides a proactive mechanism for dormant wallet owners to transition to hash-based signatures (XMSS/LMS) without requiring an immediate move of funds, thereby reducing the risk of a "sudden" quantum collapse of the UTXO set.
 
 ==Specification==
-Users will submit a "Commitment Transaction" containing:
-1. The hash of a new SPHINCS+ or Dilithium public key.
-2. A cryptographic proof of ownership of the legacy address.
-3. A "Lock-Time" period to prevent immediate theft by bad actors.
-
+A new Witness version is proposed to hold the Merkle Root of the user's Quantum-Resistant OTS keys.
+1. *Flagging:* A transaction spending from a legacy input to a new 'Quantum-Encumbered' output.
+2. *Commitment:* The scriptPubKey will contain a 32-byte hash (Merkle Root) as defined in the Reference Implementation.
 
 ==Reference Implementation==
-The following Python 3 code implements the Merkle Tree Root generation 
-used to secure dormant Bitcoin addresses. This commitment ensures that 
-even with a quantum computer, the owner's "Root Identity" cannot be forged.
+The following Python 3 code implements the Merkle Tree Root generation used to secure dormant Bitcoin addresses. This commitment ensures that even with a quantum computer, the owner's "Root Identity" cannot be forged.
 
 <pre>
 import hashlib
@@ -46,3 +42,9 @@ def build_merkle_root(leaves):
         current_level = next_level
     return current_level
 </pre>
+
+==Post-Draft Process==
+This proposal is currently in the pre-draft feedback stage. The author intends to submit this for broader discussion on the Bitcoin-Dev mailing list to finalize the consensus rules for the transition window.
+
+==Copyright==
+This BIP is licensed under the 2-clause BSD license.
