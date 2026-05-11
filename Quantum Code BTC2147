@@ -1,0 +1,48 @@
+#ifndef BITCOIN_CRYPTO_QUANTUM_MERKLE_H
+#define BITCOIN_CRYPTO_QUANTUM_MERKLE_H
+
+#include <crypto/sha256.h>
+#include <uint256.h>
+#include <vector>
+
+/**
+ * Project #2147: Quantum-Resistant Merkle Signature Scheme (MSS)
+ * Implementation of a hardened Merkle Root generator for One-Time Signatures (OTS).
+ */
+class QuantumMerkleBuilder {
+public:
+    /**
+     * Computes the Merkle Root for a set of OTS public key leaves.
+     * Implements the "Duplicate Last Leaf" logic for unbalanced trees.
+     */
+    static uint256 ComputeRoot(std::vector<uint256> leaves) {
+        if (leaves.empty()) return uint256();
+
+        std::vector<uint256> current_level = leaves;
+
+        while (current_level.size() > 1) {
+            // Handle odd-numbered levels to ensure tree balance
+            if (current_level.size() % 2 != 0) {
+                current_level.push_back(current_level.back());
+            }
+
+            std::vector<uint256> next_level;
+            next_level.reserve(current_level.size() / 2);
+
+            for (size_t i = 0; i < current_level.size(); i += 2) {
+                CSHA256 sha;
+                uint256 hash;
+                // Standard SHA256(left + right)
+                sha.Write(current_level[i].begin(), 32);
+                sha.Write(current_level[i+1].begin(), 32);
+                sha.Finalize(hash.begin());
+                next_level.push_back(hash);
+            }
+            current_level = std::move(next_level);
+        }
+
+        return current_level[0];
+    }
+};
+
+#endif // BITCOIN_CRYPTO_QUANTUM_MERKLE_H

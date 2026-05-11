@@ -1,0 +1,1 @@
+Building on the recently merged BIP-322 (PR #2141), this PR introduces the foundational Merkle Signature Scheme (MSS) logic for Project #2147. It includes a memory-optimized C++ builder and verified test vectors for SHA-256 tree construction. This is the first step toward the quantum-resistant hardening we discussed.
