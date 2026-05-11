@@ -1072,13 +1072,13 @@ users (see also: [https://en.bitcoin.it/wiki/Economic_majority economic majority
 | Matt Corallo
 | Specification
 | Complete
-|-
+|- style="background-color: #ffffcf"
 | [[bip-0322.mediawiki|322]]
 | Applications
 | Generic Signed Message Format
 | Karl-Johan Alm
 | Specification
-| Draft
+| Complete
 |- style="background-color: #cfffcf"
 | [[bip-0324.mediawiki|324]]
 | Peer Services
@@ -1394,6 +1394,13 @@ users (see also: [https://en.bitcoin.it/wiki/Economic_majority economic majority
 | Ava Chow
 | Informational
 | Draft
+|- style="background-color: #ffcfcf"
+| [[bip-0391.mediawiki|391]]
+| Applications
+| Binary Output Descriptors
+| SeedHammer
+| Specification
+| Closed
 |-
 | [[bip-0392.mediawiki|392]]
 | Applications
@@ -1469,6 +1476,13 @@ users (see also: [https://en.bitcoin.it/wiki/Economic_majority economic majority
 | Consensus (soft fork)
 | Taproot-native (Re)bindable Transactions
 | Gregory Sanders, Antoine Poinsot, Steven Roose
+| Specification
+| Draft
+|-
+| [[bip-0451.md|451]]
+| Applications
+| Dust UTXO Disposal Protocol
+| bubb1es, haris
 | Specification
 | Draft
 |}
