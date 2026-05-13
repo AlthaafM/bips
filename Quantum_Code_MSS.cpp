@@ -6,7 +6,7 @@
 #include <vector>
 
 /**
- * Project #2147: Quantum-Resistant Merkle Signature Scheme (MSS)
+ * Post-Quantum Merkle Signature Scheme (MSS) Core Implementation 
  * Implementation of a hardened Merkle Root generator for One-Time Signatures (OTS).
  */
 class QuantumMerkleBuilder {
