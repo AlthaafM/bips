@@ -1,8 +1,8 @@
-Technical Specifications: Project #2147 (MSS)
+# Technical Specifications: Stateless Post-Quantum MSS Architecture
 
 1. Cryptographic Primitive
 
-Algorithm: SHA-256 (Bitcoin Standard).
+Algorithm: Double-SHA256 (SHA256d / Bitcoin Standard).
 
 Security Strength: 128-bit Post-Quantum resistance (mitigating Grover’s Algorithm).
 
